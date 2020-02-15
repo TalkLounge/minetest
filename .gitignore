@@ -45,6 +45,7 @@ gtags.files
 /sounds
 /mods/*
 !/mods/minetest/
+!/mods/old_movement/
 /mods/minetest/*
 !/mods/minetest/mods_here.txt
 /worlds
