@@ -638,7 +638,7 @@ fov (Field of view) int 72 45 160
 
 #    Adjust the gamma encoding for the light tables. Higher numbers are brighter.
 #    This setting is for the client only and is ignored by the server.
-display_gamma (Gamma) float 1.0 0.5 10.0
+display_gamma (Gamma) float 3.0 0.5 3.0
 
 #    Gradient of light curve at minimum light level.
 lighting_alpha (Darkness sharpness) float 0.0 0.0 4.0
@@ -766,7 +766,7 @@ directional_colored_fog (Colored fog) bool true
 #    Lower is darker, Higher is lighter. The valid range of values for this
 #    setting is 0.25 to 4.0 inclusive. If the value is out of range it will be
 #    set to the nearest valid value.
-ambient_occlusion_gamma (Ambient occlusion gamma) float 2.2 0.25 4.0
+ambient_occlusion_gamma (Ambient occlusion gamma) float 4.0 0.25 4.0
 
 #    Enables animation of inventory items.
 inventory_items_animations (Inventory items animations) bool false

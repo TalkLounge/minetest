@@ -177,7 +177,7 @@ void set_default_settings(Settings *settings)
 	settings->setDefault("smooth_lighting", "true");
 	settings->setDefault("lighting_alpha", "0.0");
 	settings->setDefault("lighting_beta", "1.5");
-	settings->setDefault("display_gamma", "1.0");
+	settings->setDefault("display_gamma", "3.0");
 	settings->setDefault("lighting_boost", "0.2");
 	settings->setDefault("lighting_boost_center", "0.5");
 	settings->setDefault("lighting_boost_spread", "0.2");
@@ -225,7 +225,7 @@ void set_default_settings(Settings *settings)
 	settings->setDefault("show_entity_selectionbox", "true");
 	settings->setDefault("texture_clean_transparent", "false");
 	settings->setDefault("texture_min_size", "64");
-	settings->setDefault("ambient_occlusion_gamma", "2.2");
+	settings->setDefault("ambient_occlusion_gamma", "4.0");
 #if ENABLE_GLES
 	settings->setDefault("enable_shaders", "false");
 #else

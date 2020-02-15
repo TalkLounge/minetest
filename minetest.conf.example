@@ -736,8 +736,8 @@
 
 #    Adjust the gamma encoding for the light tables. Higher numbers are brighter.
 #    This setting is for the client only and is ignored by the server.
-#    type: float min: 0.5 max: 10
-# display_gamma = 1.0
+#    type: float min: 0.5 max: 3
+# display_gamma = 3.0
 
 #    Gradient of light curve at minimum light level.
 #    type: float min: 0 max: 4
@@ -899,7 +899,7 @@
 #    setting is 0.25 to 4.0 inclusive. If the value is out of range it will be
 #    set to the nearest valid value.
 #    type: float min: 0.25 max: 4
-# ambient_occlusion_gamma = 2.2
+# ambient_occlusion_gamma = 4
 
 #    Enables animation of inventory items.
 #    type: bool
