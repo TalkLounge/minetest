@@ -63,7 +63,21 @@ inline u8 decode_light(u8 light)
 
 // 0.0 <= light <= 1.0
 // 0.0 <= return value <= 1.0
-float decode_light_f(float light_f);
+inline float decode_light_f(float light_f)
+{
+	s32 i = (u32)(light_f * LIGHT_MAX + 0.5);
+
+	if (i <= 0)
+		return (float)light_decode_table[0] / 255.0;
+	if (i >= LIGHT_SUN)
+		return (float)light_decode_table[LIGHT_SUN] / 255.0;
+
+	float v1 = (float)light_decode_table[i - 1] / 255.0;
+	float v2 = (float)light_decode_table[i] / 255.0;
+	float f0 = (float)i - 0.5;
+	float f = light_f * LIGHT_MAX - f0;
+	return f * v2 + (1.0 - f) * v1;
+}
 
 void set_light_table(float gamma);
 
