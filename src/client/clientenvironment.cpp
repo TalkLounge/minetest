@@ -90,7 +90,7 @@ void ClientEnvironment::step(float dtime)
 	stepTimeOfDay(dtime);
 
 	// Get some settings
-	bool fly_allowed = m_client->checkLocalPrivilege("fly");
+	bool fly_allowed = true;
 	bool free_move = fly_allowed && g_settings->getBool("free_move");
 
 	// Get local player

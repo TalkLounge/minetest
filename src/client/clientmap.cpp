@@ -588,8 +588,7 @@ void ClientMap::renderPostFx(CameraMode cam_mode)
 	// - Do not if player is in third person mode
 	const ContentFeatures& features = m_nodedef->get(n);
 	video::SColor post_effect_color = features.post_effect_color;
-	if(features.solidness == 2 && !(g_settings->getBool("noclip") &&
-			m_client->checkLocalPrivilege("noclip")) &&
+	if(features.solidness == 2 && !(g_settings->getBool("noclip")) &&
 			cam_mode == CAMERA_MODE_FIRST)
 	{
 		post_effect_color = video::SColor(255, 0, 0, 0);

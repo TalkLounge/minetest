@@ -860,12 +860,10 @@ void GenericCAO::step(float dtime, ClientEnvironment *env)
 			bool allow_update = false;
 
 			// increase speed if using fast or flying fast
-			if((g_settings->getBool("fast_move") &&
-					m_client->checkLocalPrivilege("fast")) &&
+			if((g_settings->getBool("fast_move")) &&
 					(controls.aux1 ||
 					(!player->touching_ground &&
-					g_settings->getBool("free_move") &&
-					m_client->checkLocalPrivilege("fly"))))
+					g_settings->getBool("free_move"))))
 					new_speed *= 1.5;
 			// slowdown speed if sneeking
 			if (controls.sneak && walking)

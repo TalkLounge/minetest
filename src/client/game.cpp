@@ -1072,8 +1072,7 @@ void Game::run()
 	set_light_table(g_settings->getFloat("display_gamma"));
 
 #ifdef __ANDROID__
-	m_cache_hold_aux1 = g_settings->getBool("fast_move")
-			&& client->checkPrivilege("fast");
+	m_cache_hold_aux1 = g_settings->getBool("fast_move");
 #endif
 
 	irr::core::dimension2d<u32> previous_screen_size(g_settings->getU16("screen_w"),
@@ -2091,11 +2090,7 @@ void Game::toggleFreeMove()
 	g_settings->set("free_move", bool_to_cstr(free_move));
 
 	if (free_move) {
-		if (client->checkPrivilege("fly")) {
-			m_game_ui->showTranslatedStatusText("Fly mode enabled");
-		} else {
-			m_game_ui->showTranslatedStatusText("Fly mode enabled (note: no 'fly' privilege)");
-		}
+		m_game_ui->showTranslatedStatusText("Fly mode enabled");
 	} else {
 		m_game_ui->showTranslatedStatusText("Fly mode disabled");
 	}
@@ -2126,7 +2121,7 @@ void Game::togglePitchMove()
 void Game::toggleFast()
 {
 	bool fast_move = !g_settings->getBool("fast_move");
-	bool has_fast_privs = client->checkPrivilege("fast");
+	bool has_fast_privs = true;
 	g_settings->set("fast_move", bool_to_cstr(fast_move));
 
 	if (fast_move) {
@@ -2151,11 +2146,7 @@ void Game::toggleNoClip()
 	g_settings->set("noclip", bool_to_cstr(noclip));
 
 	if (noclip) {
-		if (client->checkPrivilege("noclip")) {
-			m_game_ui->showTranslatedStatusText("Noclip mode enabled");
-		} else {
-			m_game_ui->showTranslatedStatusText("Noclip mode enabled (note: no 'noclip' privilege)");
-		}
+		m_game_ui->showTranslatedStatusText("Noclip mode enabled");
 	} else {
 		m_game_ui->showTranslatedStatusText("Noclip mode disabled");
 	}
@@ -2262,7 +2253,7 @@ void Game::toggleDebug()
 	} else if (!m_game_ui->m_flags.show_profiler_graph && !draw_control->show_wireframe) {
 		m_game_ui->m_flags.show_profiler_graph = true;
 		m_game_ui->showTranslatedStatusText("Profiler graph shown");
-	} else if (!draw_control->show_wireframe && client->checkPrivilege("debug")) {
+	} else if (!draw_control->show_wireframe) {
 		m_game_ui->m_flags.show_profiler_graph = false;
 		draw_control->show_wireframe = true;
 		m_game_ui->showTranslatedStatusText("Wireframe shown");
@@ -2270,11 +2261,7 @@ void Game::toggleDebug()
 		m_game_ui->m_flags.show_debug = false;
 		m_game_ui->m_flags.show_profiler_graph = false;
 		draw_control->show_wireframe = false;
-		if (client->checkPrivilege("debug")) {
-			m_game_ui->showTranslatedStatusText("Debug info, profiler graph, and wireframe hidden");
-		} else {
-			m_game_ui->showTranslatedStatusText("Debug info and profiler graph hidden");
-		}
+		m_game_ui->showTranslatedStatusText("Debug info, profiler graph, and wireframe hidden");
 	}
 }
 
@@ -3191,8 +3178,7 @@ void Game::handlePointingAtNode(const PointedThing &pointed,
 	ClientMap &map = client->getEnv().getClientMap();
 
 	if (runData.nodig_delay_timer <= 0.0 && input->getLeftState()
-			&& !runData.digging_blocked
-			&& client->checkPrivilege("interact")) {
+			&& !runData.digging_blocked) {
 		handleDigging(pointed, nodepos, selected_item, hand_item, dtime);
 	}
 
@@ -3212,8 +3198,7 @@ void Game::handlePointingAtNode(const PointedThing &pointed,
 	}
 
 	if ((input->getRightClicked() ||
-			runData.repeat_rightclick_timer >= m_repeat_right_click_time) &&
-			client->checkPrivilege("interact")) {
+			runData.repeat_rightclick_timer >= m_repeat_right_click_time)) {
 		runData.repeat_rightclick_timer = 0;
 		infostream << "Ground right-clicked" << std::endl;
 
@@ -3403,7 +3388,7 @@ bool Game::nodePlacement(const ItemDefinition &selected_def,
 		// NOTE: This is to be eventually implemented by a mod as client-side Lua
 		if (!nodedef->get(n).walkable ||
 				g_settings->getBool("enable_build_where_you_stand") ||
-				(client->checkPrivilege("noclip") && g_settings->getBool("noclip")) ||
+				(g_settings->getBool("noclip")) ||
 				(nodedef->get(n).walkable &&
 					neighbourpos != player->getStandingNodePos() + v3s16(0, 1, 0) &&
 					neighbourpos != player->getStandingNodePos() + v3s16(0, 2, 0))) {
