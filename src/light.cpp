@@ -40,9 +40,9 @@ void set_light_table(float gamma)
 	const float b = 3.0f - 2.0f * alpha - beta;
 	const float c = alpha;
 // Mid boost
-	params.boost = g_settings->getFloat("lighting_boost");
-	params.center = g_settings->getFloat("lighting_boost_center");
-	params.sigma = g_settings->getFloat("lighting_boost_spread");
+	const float boost = g_settings->getFloat("lighting_boost");
+	const float center = g_settings->getFloat("lighting_boost_center");
+	const float sigma = g_settings->getFloat("lighting_boost_spread");
 // Gamma correction
 	gamma = rangelim(gamma, 0.5f, 3.0f);
 	
